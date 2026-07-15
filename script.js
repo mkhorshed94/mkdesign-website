@@ -11,3 +11,16 @@ const lightbox=document.getElementById('lightbox'),lightboxImg=document.getEleme
 document.querySelectorAll('.project').forEach(p=>p.querySelector('.project-img').addEventListener('click',()=>{lightboxImg.src=p.dataset.src;lightbox.classList.add('open');body.style.overflow='hidden'}));
 function closeLightbox(){lightbox.classList.remove('open');body.style.overflow=''}
 document.getElementById('closeLightbox').addEventListener('click',closeLightbox);lightbox.addEventListener('click',e=>{if(e.target===lightbox)closeLightbox()});document.addEventListener('keydown',e=>{if(e.key==='Escape')closeLightbox()});
+
+// Subtle perspective movement for portfolio cards on pointer devices.
+if(matchMedia('(hover:hover) and (pointer:fine)').matches){
+  document.querySelectorAll('.project').forEach(card=>{
+    card.addEventListener('pointermove',e=>{
+      const r=card.getBoundingClientRect();
+      const x=(e.clientX-r.left)/r.width-.5;
+      const y=(e.clientY-r.top)/r.height-.5;
+      card.style.transform=`perspective(1100px) rotateX(${-y*3.5}deg) rotateY(${x*4.5}deg) translateY(-5px)`;
+    });
+    card.addEventListener('pointerleave',()=>card.style.transform='');
+  });
+}
