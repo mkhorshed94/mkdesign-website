@@ -24,3 +24,19 @@ if(matchMedia('(hover:hover) and (pointer:fine)').matches){
     card.addEventListener('pointerleave',()=>card.style.transform='');
   });
 }
+
+// Scroll parallax gives the page a continuous spatial feel.
+let ticking=false;
+addEventListener('scroll',()=>{
+  if(ticking)return;
+  ticking=true;
+  requestAnimationFrame(()=>{
+    const y=scrollY;
+    document.querySelector('.hero-img').style.transform=`scale(1.08) translate3d(0,${y*.09}px,-20px)`;
+    document.querySelectorAll('.project-img img').forEach((img,i)=>{
+      const r=img.getBoundingClientRect();
+      if(r.bottom>0&&r.top<innerHeight) img.style.transform=`scale(1.08) translateY(${(r.top-innerHeight/2)*-.025}px)`;
+    });
+    ticking=false;
+  });
+},{passive:true});
