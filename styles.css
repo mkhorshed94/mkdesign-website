@@ -55,3 +55,30 @@ body{perspective:1400px;background:radial-gradient(circle at 50% 8%,#19150f 0,#0
 @keyframes floatFrame{50%{transform:perspective(700px) rotateX(55deg) rotateZ(48deg) translate3d(0,-18px,30px)}}
 @media(max-width:900px){.project:nth-child(n){transform:perspective(900px) rotateY(0) rotateX(1deg)}.hero:after{width:42vw;opacity:.55}.project-info{margin:0 10px}}
 @media(max-width:600px){.project:before{inset:12px -8px -12px 10px}.project-img{transform:translateZ(22px)}.project-info{transform:translateY(-8px) translateZ(35px)}.hero:after{top:18vh;right:-10vw;width:55vw}}
+
+/* MKD Immersive — Apple-style spatial edition */
+#ambientCanvas{position:fixed;inset:0;width:100%;height:100%;z-index:-2;background:#030303}
+.cursor-glow{position:fixed;z-index:-1;width:520px;height:520px;border-radius:50%;pointer-events:none;background:radial-gradient(circle,rgba(199,166,103,.16),rgba(199,166,103,.055) 28%,transparent 68%);transform:translate(-50%,-50%);filter:blur(8px);will-change:left,top}
+.scroll-rail{position:fixed;z-index:110;right:16px;top:20vh;width:2px;height:60vh;background:rgba(255,255,255,.1)}.scroll-rail i{display:block;width:100%;height:0;background:linear-gradient(#f1d99e,#9b763b);box-shadow:0 0 18px #c7a667}
+main,footer,.nav{position:relative;z-index:1}.nav{position:fixed}
+.hero{height:115svh;background:#030303;perspective:1200px}.hero-img{position:absolute;left:28%;top:9%;width:68%;height:78%;border-radius:4px;object-fit:cover;box-shadow:-45px 60px 140px #000,0 0 80px rgba(199,166,103,.1);clip-path:polygon(5% 0,100% 0,96% 100%,0 94%);animation:none;will-change:transform,filter}
+.hero-content{bottom:20vh;max-width:620px}.hero h1{font-size:clamp(42px,5.3vw,78px);text-shadow:0 12px 50px #000}.hero-copy{max-width:470px}.hero:after{opacity:.7}
+.intro{background:linear-gradient(180deg,rgba(3,3,3,.78),rgba(12,10,7,.74));backdrop-filter:blur(14px)}
+.feature-strip{margin:8vh var(--pad);min-height:78vh;border:1px solid rgba(199,166,103,.22);background:rgba(5,5,5,.68);box-shadow:0 45px 120px #000;transform:perspective(1300px) rotateX(1deg)}
+.feature-img{overflow:hidden}.feature-img img{transform:scale(1.08);will-change:transform}
+.services{background:linear-gradient(145deg,rgba(5,5,5,.92),rgba(22,17,10,.72));backdrop-filter:blur(18px)}
+.service-list{perspective:1100px}.service{background:linear-gradient(135deg,rgba(255,255,255,.06),rgba(199,166,103,.025));backdrop-filter:blur(18px);border-color:rgba(199,166,103,.25)}
+.projects{padding-left:clamp(20px,8vw,130px);padding-right:clamp(20px,8vw,130px);background:transparent}
+.projects-head{position:relative;z-index:5;margin-bottom:18vh}.project-grid{display:block;perspective:1500px}
+.project,.project.wide{position:sticky;top:10vh;width:100%;height:82vh;margin:0 0 28vh;transform:none!important;filter:none!important;perspective:1400px;transform-style:preserve-3d}
+.project:nth-child(even){width:88%;margin-left:auto}.project:nth-child(3n){width:82%;margin-right:auto}
+.project:before{inset:7% -2.2% -3% 4%;background:linear-gradient(145deg,rgba(199,166,103,.24),rgba(10,8,5,.85));border:1px solid rgba(231,199,130,.55);box-shadow:38px 45px 100px #000;transform:translateZ(-70px)}
+.project-img,.project-img.portrait{height:100%;border:1px solid rgba(242,215,157,.45);box-shadow:0 55px 130px #000;transform:translateZ(45px);transition:none}
+.project-img img{transform:scale(1.08);transition:none;will-change:transform,filter}
+.project-info{position:absolute;left:5%;right:5%;bottom:5%;z-index:3;margin:0;padding:22px 24px;background:linear-gradient(90deg,rgba(4,4,4,.92),rgba(4,4,4,.45));border:1px solid rgba(199,166,103,.32);backdrop-filter:blur(18px);transform:translateZ(95px);box-shadow:0 25px 70px #000}
+.project-info h3{font-size:clamp(22px,3vw,42px)}
+.process{background:rgba(13,11,8,.82);backdrop-filter:blur(20px)}
+.contact{margin:8vh var(--pad);height:92vh;border:1px solid rgba(199,166,103,.25);overflow:hidden;box-shadow:0 55px 140px #000}.contact>img{transform:scale(1.08);will-change:transform}.contact-inner{background:radial-gradient(circle at center,transparent,rgba(0,0,0,.35))}
+footer{background:rgba(3,3,3,.95)}
+@media(max-width:900px){.cursor-glow{display:none}.scroll-rail{right:7px}.hero{height:105svh}.hero-img{left:8%;top:12%;width:92%;height:67%;opacity:.78}.hero-content{bottom:12vh}.feature-strip{margin:5vh 20px}.project,.project.wide,.project:nth-child(n){top:9vh;width:100%;height:76svh;margin-bottom:18vh}.contact{margin:5vh 20px}.project-info{left:3%;right:3%;bottom:3%}}
+@media(max-width:600px){.hero h1{font-size:38px}.hero-img{clip-path:polygon(3% 0,100% 0,96% 100%,0 96%)}.project,.project.wide,.project:nth-child(n){height:68svh;margin-bottom:16vh}.project:before{inset:4% -2% -2% 3%}.project-info{padding:14px}.project-info h3{font-size:22px}.project-info p{font-size:8px}.feature-strip{transform:none}.scroll-rail{display:none}}

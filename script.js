@@ -40,3 +40,44 @@ addEventListener('scroll',()=>{
     ticking=false;
   });
 },{passive:true});
+
+// Immersive spatial scene: gold dust, light tracking and scroll-driven camera.
+const canvas=document.getElementById('ambientCanvas');
+const ctx=canvas.getContext('2d',{alpha:false});
+let points=[];
+function sizeScene(){
+  const d=Math.min(devicePixelRatio||1,1.6);
+  canvas.width=innerWidth*d;canvas.height=innerHeight*d;ctx.setTransform(d,0,0,d,0,0);
+  points=Array.from({length:Math.min(95,Math.floor(innerWidth/12))},()=>({x:Math.random()*innerWidth,y:Math.random()*innerHeight,z:Math.random(),s:Math.random()*1.4+.25}));
+}
+function drawScene(t){
+  ctx.fillStyle='#030303';ctx.fillRect(0,0,innerWidth,innerHeight);
+  const g=ctx.createRadialGradient(innerWidth*.72,innerHeight*.28,0,innerWidth*.72,innerHeight*.28,innerWidth*.6);
+  g.addColorStop(0,'rgba(116,82,30,.16)');g.addColorStop(1,'rgba(0,0,0,0)');ctx.fillStyle=g;ctx.fillRect(0,0,innerWidth,innerHeight);
+  points.forEach(p=>{p.y-=p.s*(.08+p.z*.13);if(p.y<0)p.y=innerHeight;const a=.12+p.z*.42;ctx.fillStyle=`rgba(220,187,115,${a})`;ctx.beginPath();ctx.arc(p.x,p.y,.25+p.z*1.15,0,Math.PI*2);ctx.fill()});
+  requestAnimationFrame(drawScene);
+}
+sizeScene();addEventListener('resize',sizeScene);requestAnimationFrame(drawScene);
+
+const glow=document.getElementById('cursorGlow');
+addEventListener('pointermove',e=>{glow.style.left=e.clientX+'px';glow.style.top=e.clientY+'px'},{passive:true});
+
+function spatialScroll(){
+  const max=document.documentElement.scrollHeight-innerHeight;
+  document.getElementById('scrollProgress').style.height=(max?scrollY/max*100:0)+'%';
+  document.querySelectorAll('.project').forEach((card,i)=>{
+    const r=card.getBoundingClientRect();
+    const p=Math.max(-1,Math.min(1,(r.top-innerHeight*.1)/innerHeight));
+    const frame=card.querySelector('.project-img');
+    const image=frame.querySelector('img');
+    const side=i%2?1:-1;
+    frame.style.transform=`translateZ(45px) rotateY(${p*side*8}deg) rotateX(${p*3}deg) scale(${1-Math.abs(p)*.025})`;
+    image.style.transform=`scale(1.1) translate3d(${p*side*18}px,${p*-24}px,0)`;
+    image.style.filter=`brightness(${1-Math.abs(p)*.18})`;
+  });
+  const hero=document.querySelector('.hero-img');
+  if(hero)hero.style.transform=`perspective(1200px) translate3d(0,${scrollY*.08}px,0) rotateY(${Math.min(scrollY/220,3)}deg) scale(1.04)`;
+  const contact=document.querySelector('.contact>img');
+  if(contact){const r=contact.getBoundingClientRect();contact.style.transform=`scale(1.12) translateY(${(r.top-innerHeight/2)*-.025}px)`}
+}
+addEventListener('scroll',()=>requestAnimationFrame(spatialScroll),{passive:true});spatialScroll();
