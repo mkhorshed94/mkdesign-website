@@ -82,3 +82,16 @@ main,footer,.nav{position:relative;z-index:1}.nav{position:fixed}
 footer{background:rgba(3,3,3,.95)}
 @media(max-width:900px){.cursor-glow{display:none}.scroll-rail{right:7px}.hero{height:105svh}.hero-img{left:8%;top:12%;width:92%;height:67%;opacity:.78}.hero-content{bottom:12vh}.feature-strip{margin:5vh 20px}.project,.project.wide,.project:nth-child(n){top:9vh;width:100%;height:76svh;margin-bottom:18vh}.contact{margin:5vh 20px}.project-info{left:3%;right:3%;bottom:3%}}
 @media(max-width:600px){.hero h1{font-size:38px}.hero-img{clip-path:polygon(3% 0,100% 0,96% 100%,0 96%)}.project,.project.wide,.project:nth-child(n){height:68svh;margin-bottom:16vh}.project:before{inset:4% -2% -2% 3%}.project-info{padding:14px}.project-info h3{font-size:22px}.project-info p{font-size:8px}.feature-strip{transform:none}.scroll-rail{display:none}}
+
+/* Cinematic scroll storytelling — no mouse gimmicks */
+.cursor-glow{display:none!important}.project{transform:none!important}
+.scene-counter{position:fixed;z-index:105;left:22px;bottom:28px;display:flex;align-items:center;gap:10px;color:#d8bd83;font-size:9px;letter-spacing:.16em}.scene-counter i{display:block;width:42px;height:1px;background:linear-gradient(90deg,#c7a667,rgba(199,166,103,.2))}
+.project{opacity:.28;transition:opacity .35s ease}.project.scene-active{opacity:1}
+.project-img{overflow:hidden;transition:box-shadow .5s ease!important}.project.scene-active .project-img{box-shadow:0 55px 150px #000,0 0 70px rgba(199,166,103,.11)}
+.project-info{opacity:0;transform:translate3d(0,28px,95px);transition:opacity .55s ease,transform .7s cubic-bezier(.2,.75,.2,1)}
+.project.scene-active .project-info{opacity:1;transform:translate3d(0,0,95px)}
+.project:after{content:"SCROLL TO CONTINUE";position:absolute;right:18px;bottom:-34px;color:rgba(199,166,103,.55);font-size:8px;letter-spacing:.22em}
+.project:last-child:after{content:"END OF SELECTED WORK"}
+.projects-head h2{background:linear-gradient(100deg,#fff 10%,#c7a667 55%,#fff 90%);background-size:200% auto;color:transparent;background-clip:text;-webkit-background-clip:text;animation:titleShine 7s linear infinite}
+@keyframes titleShine{to{background-position:200% center}}
+@media(max-width:600px){.scene-counter{left:14px;bottom:16px}.project{opacity:.42}.project:after{display:none}.project-info{transform:translate3d(0,18px,35px)}.project.scene-active .project-info{transform:translate3d(0,0,35px)}}
